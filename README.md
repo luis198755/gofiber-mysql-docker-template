@@ -25,10 +25,14 @@ $ make clean
 
 ## API endpoints
 
-### http://127.0.0.1:3000/apples
+```Go
+app.Get("/apples", GetApples)
+app.Post("/apples/new", AddApple)
+app.Get("/apples/delete", FlushApples)
 
-### http://127.0.0.1:3000/apples
-
+app.Get("/apple/:id", GetApple)
+app.Put("/apple/:id", UpdateApple)
+app.Get("/apple/:id/delete", DeleteApple)
 ```
 
 
