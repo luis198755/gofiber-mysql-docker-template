@@ -1,0 +1,41 @@
+version: '2.2'
+
+networks:
+    db-network:
+      driver: bridge
+
+services:
+    mariadb:
+        container_name: mariadb
+        image: 'bitnami/mariadb:latest'
+        environment:
+            - DB_RECONNECT_RETRIES=3
+            - MARIADB_ROOT_PASSWORD=1234567890root_password
+            - MARIADB_USER=gorm
+            - MARIADB_DATABASE=gorm
+            - MARIADB_PASSWORD=gorm
+        networks:
+            - db-network
+
+    my-service:
+        depends_on:
+            - mariadb
+        container_name: my-service
+        build: .
+        environment: 
+            - DB_USER=gorm
+            - DB_PASSWORD=gorm
+            - DB_DATABASE=gorm
+        volumes: 
+            - /etc/localtime:/etc/localtime:ro
+            - ~/Desktop/mariadb:/bitnami/mariadb
+        ports:
+            - "127.0.0.1:3000:3000"
+        #mem_limit: 1024m     # limit RAM usage
+        #cpu_percent: 25      # limit CPU usage
+        restart: unless-stopped
+        networks:
+            - db-network
+        links:
+        - mariadb
+
