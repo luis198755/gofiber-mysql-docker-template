@@ -72,12 +72,11 @@ func main() {
 	})
 
 	app.Get("/apples", GetApples)
-	app.Post("/apples/new", AddApple)
-	app.Get("/apples/delete", FlushApples)
-
-	app.Get("/apple/:id", GetApple)
-	app.Put("/apple/:id", UpdateApple)
-	app.Get("/apple/:id/delete", DeleteApple)
+	app.Get("/apples/:id", GetApple)
+	app.Post("/apples", AddApple)
+	app.Put("/apples/:id", UpdateApple)
+	app.Delete("/apples", FlushApples)
+	app.Delete("/apples/:id", DeleteApple)
 
 	app.Listen(":3000")
 
