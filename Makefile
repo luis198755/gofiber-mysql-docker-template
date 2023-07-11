@@ -6,8 +6,8 @@ build:
 # using build to find compilation errors fast.
 # tries to build the application locally and then properly within the container environment.
 containers: build
-	docker-compose build --force-rm --no-cache 
-	docker-compose up -d
+	docker compose build --force-rm --no-cache 
+	docker compose up -d
 	docker ps
 	sleep 5
 	docker logs my-service
